@@ -53,7 +53,7 @@ export function WelcomeHeader() {
                 )}
               </button>
 
-              <Link href="/profil" className="relative group">
+              <Link href="/customer/profil" className="relative group">
                 <Avatar className="h-12 w-12 border-2 border-white/80 group-hover:border-white transition-colors">
                   <AvatarImage src={user?.avatar} alt={user?.name} />
                   <AvatarFallback className="bg-foreground/80 text-background">{user?.name?.[0] || 'E'}</AvatarFallback>

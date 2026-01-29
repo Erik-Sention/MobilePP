@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { ChatBubble } from '@/components/chatt/ChatBubble';
 import { ChatInput } from '@/components/chatt/ChatInput';
 import { mockConversations, mockMessages } from '@/lib/mock-data/chats';
@@ -6,9 +7,10 @@ import Link from 'next/link';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { notFound } from 'next/navigation';
 
-export default function ChatDetailPage({ params }: { params: { id: string } }) {
-  const conversation = mockConversations.find(c => c.id === params.id);
-  const messages = mockMessages[params.id] || [];
+export default function ChatDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  const conversation = mockConversations.find(c => c.id === id);
+  const messages = mockMessages[id] || [];
 
   if (!conversation) {
     notFound();
@@ -18,7 +20,7 @@ export default function ChatDetailPage({ params }: { params: { id: string } }) {
     <div className="flex flex-col h-screen bg-background">
       <header className="bg-white p-4 flex items-center justify-between border-b sticky top-0 z-10">
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <Link href="/chatt" className="p-2 -ml-2">
+          <Link href="/customer/chatt" className="p-2 -ml-2">
             <ChevronLeft className="h-6 w-6" />
           </Link>
           <Avatar className="h-10 w-10">
@@ -51,7 +53,7 @@ export default function ChatDetailPage({ params }: { params: { id: string } }) {
         ))}
       </div>
 
-      <ChatInput conversationId={params.id} />
+      <ChatInput conversationId={id} />
     </div>
   );
 }

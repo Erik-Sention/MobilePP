@@ -1,10 +1,52 @@
 // User & Authentication
+export type UserRole = 'customer' | 'employee';
+export type EmployeeType = 'doctor' | 'nurse' | 'admin';
+
 export interface User {
   id: string;
   name: string;
   email: string;
   avatar: string;
   isPremium: boolean;
+  role: UserRole;
+  employeeType?: EmployeeType; // Only for employees
+}
+
+// Patient Profile (extends User with health data for admin views)
+export interface PatientProfile extends User {
+  role: 'customer';
+  assignedArticleIds: string[];
+  lastActivity?: Date;
+  // Personal information
+  firstName: string;
+  lastName: string;
+  personnummer: string; // Swedish personal number (YYYYMMDD-XXXX)
+  dateOfBirth: string;
+  gender: 'man' | 'kvinna' | 'annat';
+  phoneNumber: string;
+  address: {
+    street: string;
+    postalCode: string;
+    city: string;
+  };
+  // Work information
+  employer?: string;
+  department?: string;
+  jobTitle?: string;
+  manager?: string; // Immediate supervisor
+  workPhone?: string;
+  workEmail?: string;
+  // Emergency contact
+  emergencyContact: {
+    name: string;
+    phone: string;
+    relation: string;
+  };
+  // Medical/Insurance
+  insuranceProvider?: string;
+  insuranceNumber?: string;
+  bloodType?: string;
+  allergies?: string[];
 }
 
 // Health Metrics
@@ -46,6 +88,18 @@ export interface LibraryContent {
   progress: number; // 0-100
   status: 'new' | 'in-progress' | 'completed';
   badgeText?: string;
+}
+
+// Enhanced Content for Admin Management
+export interface ContentArticle extends LibraryContent {
+  createdBy: string; // Employee ID
+  createdByName: string;
+  createdAt: Date;
+  updatedAt: Date;
+  assignedTo: string[]; // Patient IDs
+  category: string;
+  tags: string[];
+  publishStatus: 'draft' | 'published';
 }
 
 // Team

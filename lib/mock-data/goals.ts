@@ -70,3 +70,9 @@ export const mockWeeklyGoals: Goal[] = [
     badgeText: '5/7',
   },
 ];
+
+// Combined health goals for simplified view
+export const mockHealthGoals: Goal[] = [
+  ...mockDailyGoals,
+  ...mockWeeklyGoals,
+];

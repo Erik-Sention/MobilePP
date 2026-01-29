@@ -6,10 +6,10 @@ import { Home, BookOpen, ClipboardList, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/', label: 'Hem', icon: Home },
-  { href: '/bibliotek', label: 'Bibliotek', icon: BookOpen },
-  { href: '/halsoplan', label: 'Hälsoplan', icon: ClipboardList },
-  { href: '/chatt', label: 'Chatt', icon: MessageSquare },
+  { href: '/customer', label: 'Hem', icon: Home },
+  { href: '/customer/bibliotek', label: 'Bibliotek', icon: BookOpen },
+  { href: '/customer/halsoplan', label: 'Hälsoplan', icon: ClipboardList },
+  { href: '/customer/chatt', label: 'Chatt', icon: MessageSquare },
 ];
 
 export function BottomNav() {
@@ -22,7 +22,7 @@ export function BottomNav() {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href ||
-              (item.href !== '/' && pathname.startsWith(item.href));
+              (item.href !== '/customer' && pathname.startsWith(item.href));
 
             return (
               <Link

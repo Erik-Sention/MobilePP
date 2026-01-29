@@ -9,22 +9,26 @@ export interface Attachment {
 
 export interface HealthcareNote {
   id: string;
+  patientId: string;
   date: string;
   author: string;
   role: string;
   content: string;
   type: 'note' | 'recommendation' | 'observation';
+  isPublished: boolean; // true = visible to patient, false = internal only
   attachments?: Attachment[];
 }
 
 export const mockHealthcareNotes: HealthcareNote[] = [
   {
     id: '1',
+    patientId: '1',
     date: '2024-02-15',
     author: 'Dr. Sara Blank',
     role: 'Specialistläkare, Allmänmedicin',
     content: 'Patienten visar god progress i sin återhämtning. Blodsockernivåerna är stabila och inom normalintervall. Fortsätt med nuvarande medicinering och träningsplan.',
     type: 'note',
+    isPublished: true,
     attachments: [
       {
         id: 'att1',
@@ -38,11 +42,13 @@ export const mockHealthcareNotes: HealthcareNote[] = [
   },
   {
     id: '2',
+    patientId: '1',
     date: '2024-02-10',
     author: 'Johan Svensson',
     role: 'Psykolog, KBT',
     content: 'Vi har diskuterat strategier för stresshantering. Patienten har gjort goda framsteg med meditationsövningarna. Rekommenderar att fortsätta med dagliga 15-minuters sessioner.',
     type: 'recommendation',
+    isPublished: true,
     attachments: [
       {
         id: 'att2',
@@ -64,11 +70,13 @@ export const mockHealthcareNotes: HealthcareNote[] = [
   },
   {
     id: '3',
+    patientId: '1',
     date: '2024-02-05',
     author: 'Dr. Sara Blank',
     role: 'Specialistläkare, Allmänmedicin',
     content: 'Resultat från senaste blodprovet visar förbättrade värden på LDL-kolesterol. Ferritin ligger nu inom önskat intervall. Bra jobbat med koständringarna!',
     type: 'observation',
+    isPublished: false,
     attachments: [
       {
         id: 'att4',
@@ -90,10 +98,19 @@ export const mockHealthcareNotes: HealthcareNote[] = [
   },
   {
     id: '4',
+    patientId: '1',
     date: '2024-01-28',
     author: 'Johan Svensson',
     role: 'Psykolog, KBT',
     content: 'Patienten rapporterar förbättrad sömnkvalitet efter implementering av nya rutiner. Fortsätt med god sömnhygien och undvik skärmar 1 timme före sänggåendet.',
-    type: 'recommendation'
+    type: 'recommendation',
+    isPublished: false
   }
 ];
+
+// Helper function to get notes for a specific patient
+export function getNotesForPatient(patientId: string): HealthcareNote[] {
+  return mockHealthcareNotes
+    .filter(note => note.patientId === patientId)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
