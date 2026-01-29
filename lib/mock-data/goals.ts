@@ -1,0 +1,72 @@
+import { Goal } from '../types';
+
+export const mockDailyGoals: Goal[] = [
+  {
+    id: '1',
+    title: '30 minuters promenad',
+    description: 'Lågintensiv aktivitet för hjärthälsa.',
+    type: 'daily',
+    progress: 100,
+    status: 'completed',
+    badgeText: 'KLAR',
+  },
+  {
+    id: '2',
+    title: 'Ta dina vitaminer',
+    description: 'D-vitamin och Omega-3.',
+    type: 'daily',
+    progress: 100,
+    status: 'completed',
+    badgeText: 'KLAR',
+  },
+  {
+    id: '3',
+    title: 'Meditationsövning',
+    description: 'Mindfulness för stresshantering.',
+    type: 'daily',
+    progress: 40,
+    currentValue: 12,
+    targetValue: 30,
+    unit: 'min',
+    status: 'in-progress',
+    badgeText: 'PÅGÅR',
+  },
+  {
+    id: '4',
+    title: 'Drick 2L Vatten',
+    description: 'Vätskebalans är viktig.',
+    type: 'daily',
+    progress: 0,
+    currentValue: 0,
+    targetValue: 2,
+    unit: 'L',
+    status: 'pending',
+  },
+];
+
+export const mockWeeklyGoals: Goal[] = [
+  {
+    id: 'w1',
+    title: 'Träna 3 gånger',
+    description: 'Kombinera styrka och kondition',
+    type: 'weekly',
+    progress: 67,
+    currentValue: 2,
+    targetValue: 3,
+    unit: 'pass',
+    status: 'in-progress',
+    badgeText: '2/3',
+  },
+  {
+    id: 'w2',
+    title: 'Sov 7+ timmar varje natt',
+    description: 'God sömn är grunden för hälsa',
+    type: 'weekly',
+    progress: 71,
+    currentValue: 5,
+    targetValue: 7,
+    unit: 'nätter',
+    status: 'in-progress',
+    badgeText: '5/7',
+  },
+];
